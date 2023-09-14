@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Modules\Conferences\ConfSystem.Modules.Conferences.Api\ConfSystem.Modules.Conferences.Api.csproj" />
       <ProjectReference Include="..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
