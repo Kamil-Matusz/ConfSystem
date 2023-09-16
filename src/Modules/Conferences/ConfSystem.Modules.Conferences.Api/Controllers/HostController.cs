@@ -5,8 +5,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace ConfSystem.Modules.Conferences.Api.Controllers;
 
-[Route("conferences-module" + "[controller]")]
-[ApiController]
 internal class HostController : BaseController
 {
     private readonly IHostService _hostService;

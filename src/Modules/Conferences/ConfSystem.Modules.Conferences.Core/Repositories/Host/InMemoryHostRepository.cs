@@ -1,4 +1,3 @@
-using ConfSystem.Modules.Conferences.Core.DTO;
 using ConfSystem.Modules.Conferences.Core.Entities;
 
 namespace ConfSystem.Modules.Conferences.Core.Repositories;

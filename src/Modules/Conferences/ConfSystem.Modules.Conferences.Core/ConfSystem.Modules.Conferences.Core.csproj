@@ -8,6 +8,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
+
+
+
+
     </ItemGroup>
 
 

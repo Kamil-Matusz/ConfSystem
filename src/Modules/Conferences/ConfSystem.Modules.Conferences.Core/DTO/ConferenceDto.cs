@@ -17,3 +17,9 @@ public class ConferenceDto
     public DateTime From { get; set; }
     public DateTime To { get; set; }
 }
+
+internal class ConferenceDetailsDto : ConferenceDto
+{
+    [Required]
+    public string Description { get; set; }
+}
