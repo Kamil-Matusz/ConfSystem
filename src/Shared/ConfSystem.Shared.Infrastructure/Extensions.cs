@@ -4,6 +4,7 @@ using ConfSystem.Shared.Infrastructure.Api;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("ConfSystem.Bootstrapper")]
@@ -15,6 +16,7 @@ internal static class Extensions
     {
         services.AddErrorHandling();
         services.AddSingleton<IClock, Clock>();
+        services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>
             {
@@ -26,6 +28,21 @@ internal static class Extensions
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
         app.UseErrorHandling();
+        app.UseRouting();
         return app;
+    }
+
+    public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
+    {
+        using var serviceProvider = services.BuildServiceProvider();
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        return configuration.GetOptions<T>(sectionName);
+    }
+
+    public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : new()
+    {
+        var options = new T();
+        configuration.GetSection(sectionName).Bind(options);
+        return options;
     }
 }
