@@ -11,4 +11,11 @@
     </ItemGroup>
 
 
+    <ItemGroup>
+      <None Remove="module.conferences.json" />
+      <Content Include="module.conferences.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
