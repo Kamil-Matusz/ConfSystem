@@ -11,4 +11,5 @@
       <ProjectReference Include="..\ConfSystem.Modules.Speakers.Core\ConfSystem.Modules.Speakers.Core.csproj" />
     </ItemGroup>
 
+
 </Project>
