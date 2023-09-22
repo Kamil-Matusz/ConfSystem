@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using ConfSystem.Modules.Users.Core.DAL;
 using ConfSystem.Modules.Users.Core.DAL.Repositories;
 using ConfSystem.Modules.Users.Core.Entities;
+using ConfSystem.Modules.Users.Core.Services;
 using ConfSystem.Shared.Infrastructure.PostgreSQL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ internal static class Extensions
         services.AddPostgres<UsersDbContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+        services.AddScoped<IUserService, UserService>();
         return services;
     }
 }

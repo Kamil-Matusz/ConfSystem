@@ -1,5 +1,6 @@
 using ConfSystem.Modules.Speakers.Core.DTO;
 using ConfSystem.Modules.Speakers.Core.Services;
+using ConfSystem.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfSystem.Modules.Speakers.Api.Controllers;
@@ -7,10 +8,12 @@ namespace ConfSystem.Modules.Speakers.Api.Controllers;
 internal class SpeakersController : BaseController
 {
     private readonly ISpeakersService _speakersService;
+    private readonly IContext _context;
 
-    public SpeakersController(ISpeakersService speakersService)
+    public SpeakersController(ISpeakersService speakersService, IContext context)
     {
         _speakersService = speakersService;
+        _context = context;
     }
     
     [HttpGet("{id:guid}")]
@@ -34,7 +37,7 @@ internal class SpeakersController : BaseController
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> UpdateSpeaker(Guid id, SpeakerDto speaker)
     {
-        speaker.SpeakerId = id;
+        speaker.SpeakerId = _context.Identity.Id;
         await _speakersService.UpdateSpeakerAsync(speaker);
         return NoContent();
     }
