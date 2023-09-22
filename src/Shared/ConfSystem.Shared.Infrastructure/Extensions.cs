@@ -1,6 +1,8 @@
 using System.Runtime.CompilerServices;
 using ConfSystem.Shared.Abstractions;
+using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Api;
+using ConfSystem.Shared.Infrastructure.Auth;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -12,10 +14,11 @@ namespace ConfSystem.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<IModule> modules)
     {
         services.AddErrorHandling();
         services.AddSingleton<IClock, Clock>();
+        services.AddAuth(modules);
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>
@@ -28,7 +31,9 @@ internal static class Extensions
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
         app.UseErrorHandling();
+        app.UseAuthentication();
         app.UseRouting();
+        app.UseAuthorization();
         return app;
     }
 
