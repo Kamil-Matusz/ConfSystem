@@ -25,6 +25,8 @@ app.UseInfrastructure();
 
 app.MapGet("/", () => "Hello World!");
 
+app.MapModuleInfo();
+
 app.MapControllers();
 
 app.Run();

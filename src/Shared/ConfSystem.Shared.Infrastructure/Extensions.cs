@@ -5,6 +5,7 @@ using ConfSystem.Shared.Infrastructure.Api;
 using ConfSystem.Shared.Infrastructure.Auth;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
+using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,9 @@ internal static class Extensions
                 Version = "v1"
             });
         });
+        
+        // Module List generator
+        services.AddModuleInfo(modules);
         
         services.AddErrorHandling();
         services.AddSingleton<IContextFactory, ContextFactory>();
