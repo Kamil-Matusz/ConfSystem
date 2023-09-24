@@ -1,21 +1,59 @@
 using System.Runtime.CompilerServices;
 using ConfSystem.Shared.Abstractions;
+using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Api;
+using ConfSystem.Shared.Infrastructure.Auth;
+using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
+using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("ConfSystem.Bootstrapper")]
 namespace ConfSystem.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    private const string CorsPolicy = "cors";
+    
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<IModule> modules)
     {
+        // CORS Policy
+        services.AddCors(cors =>
+        {
+            cors.AddPolicy(CorsPolicy, x =>
+            {
+                x.WithOrigins("*")
+                    .WithMethods("POST", "PUT", "DELETE")
+                    .WithHeaders("Content-Type", "Authorization");
+
+            });
+        });
+        
+        // Swagger documentation
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "ConfSystem",
+                Version = "v1"
+            });
+        });
+        
+        // Module List generator
+        services.AddModuleInfo(modules);
+        
         services.AddErrorHandling();
+        services.AddSingleton<IContextFactory, ContextFactory>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
         services.AddSingleton<IClock, Clock>();
+        services.AddAuth(modules);
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>
@@ -27,8 +65,17 @@ internal static class Extensions
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
+        app.UseCors(CorsPolicy);
         app.UseErrorHandling();
+        app.UseSwagger();
+        app.UseSwaggerUI(swagger =>
+        {
+            swagger.RoutePrefix = "swagger";
+            swagger.DocumentTitle = "ConfSystem Documentation";
+        });
+        app.UseAuthentication();
         app.UseRouting();
+        app.UseAuthorization();
         return app;
     }
 

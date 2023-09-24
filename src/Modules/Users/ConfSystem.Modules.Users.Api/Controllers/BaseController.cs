@@ -1,14 +1,14 @@
 using ConfSystem.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConfSystem.Modules.Conferences.Api.Controllers;
+namespace ConfSystem.Modules.Users.Api.Controllers;
 
 [ApiController]
 [ProducesDefaultContentType]
 [Route(BasePath + "/[controller]")]
-internal class BaseController : ControllerBase
+public class BaseController : ControllerBase
 {
-    protected const string BasePath = "conferences-module";
+    protected const string BasePath = "users-module";
     protected ActionResult<T> OkOrNotFound<T>(T model)
     {
         if (model is null)
