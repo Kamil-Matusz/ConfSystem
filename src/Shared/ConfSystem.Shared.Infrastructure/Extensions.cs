@@ -10,14 +10,40 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("ConfSystem.Bootstrapper")]
 namespace ConfSystem.Shared.Infrastructure;
 
 internal static class Extensions
 {
+    private const string CorsPolicy = "cors";
+    
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<IModule> modules)
     {
+        // CORS Policy
+        services.AddCors(cors =>
+        {
+            cors.AddPolicy(CorsPolicy, x =>
+            {
+                x.WithOrigins("*")
+                    .WithMethods("POST", "PUT", "DELETE")
+                    .WithHeaders("Content-Type", "Authorization");
+
+            });
+        });
+        
+        // Swagger documentation
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "ConfSystem",
+                Version = "v1"
+            });
+        });
+        
         services.AddErrorHandling();
         services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -35,7 +61,14 @@ internal static class Extensions
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
+        app.UseCors(CorsPolicy);
         app.UseErrorHandling();
+        app.UseSwagger();
+        app.UseSwaggerUI(swagger =>
+        {
+            swagger.RoutePrefix = "swagger";
+            swagger.DocumentTitle = "ConfSystem Documentation";
+        });
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();

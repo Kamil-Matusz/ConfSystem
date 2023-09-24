@@ -1,8 +1,10 @@
+using ConfSystem.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfSystem.Modules.Users.Api.Controllers;
 
 [ApiController]
+[ProducesDefaultContentType]
 [Route(BasePath + "/[controller]")]
 public class BaseController : ControllerBase
 {
