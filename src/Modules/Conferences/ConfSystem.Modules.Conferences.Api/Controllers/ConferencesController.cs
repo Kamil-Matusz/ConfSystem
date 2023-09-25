@@ -1,11 +1,14 @@
 using ConfSystem.Modules.Conferences.Core.DTO;
 using ConfSystem.Modules.Conferences.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfSystem.Modules.Conferences.Api.Controllers;
 
+[Authorize]
 internal class ConferencesController : BaseController
 {
+    private const string Policy = "conferences";
     private readonly IConferenceService _conferenceService;
 
     public ConferencesController(IConferenceService conferenceService)
@@ -14,10 +17,12 @@ internal class ConferencesController : BaseController
     }
 
 
+    [AllowAnonymous]
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ConferenceDetailsDto>> GetConference(Guid id) =>
         OkOrNotFound(await _conferenceService.GetAsync(id));
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<ConferenceDto>>> GetAllConferencesAsync() =>
         Ok(await _conferenceService.GetAllAsync());

@@ -10,29 +10,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Abstractions\ConfSystem.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Conferences\ConfSystem.Modules.Conferences.Messages\ConfSystem.Modules.Conferences.Messages.csproj" />
-
-
     </ItemGroup>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </Project>

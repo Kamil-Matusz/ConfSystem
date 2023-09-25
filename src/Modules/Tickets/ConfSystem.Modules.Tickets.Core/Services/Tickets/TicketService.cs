@@ -29,7 +29,7 @@ internal class TicketService : ITicketService
 
     public async Task PurchaseAsync(Guid conferenceId, Guid userId)
     {
-        var conference = await _conferenceRepository.GetConferenceAsync()(conferenceId);
+        var conference = await _conferenceRepository.GetConferenceAsync(conferenceId);
         if (conference is null)
         {
             throw new ConferenceNotFoundException(conferenceId);

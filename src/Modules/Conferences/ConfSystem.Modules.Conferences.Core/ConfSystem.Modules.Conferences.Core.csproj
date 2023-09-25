@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\ConfSystem.Modules.Conferences.Messages\ConfSystem.Modules.Conferences.Messages.csproj" />
+
 
 
 

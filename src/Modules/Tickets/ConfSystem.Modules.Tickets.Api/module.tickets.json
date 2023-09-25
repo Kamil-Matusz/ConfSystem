@@ -1,7 +1,7 @@
 {
-  "users": {
+  "tickets": {
     "module": {
-      "name": "Users",
+      "name": "Tickets",
       "enabled": true
     }
   }
