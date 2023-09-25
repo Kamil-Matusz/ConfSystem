@@ -1,5 +1,6 @@
 using ConfSystem.Modules.Conferences.Api;
 using ConfSystem.Modules.Speakers.Api;
+using ConfSystem.Modules.Tickets.Api;
 using ConfSystem.Modules.Users.Api;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure;
@@ -17,7 +18,8 @@ builder.Services
     .AddInfrastructure(_modules)
     .AddConferences()
     .AddSpeakers()
-    .AddUsers();
+    .AddUsers()
+    .AddTickets();
 
 var app = builder.Build();
 
