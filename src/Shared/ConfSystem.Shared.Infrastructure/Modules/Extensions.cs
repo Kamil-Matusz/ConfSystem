@@ -66,7 +66,7 @@ public static class Extensions
         var registry = new ModuleRegistry();
         var types = assemblies.SelectMany(x => x.GetTypes()).ToArray();
         var eventTypes = types
-            .Where(x => x.IsClass && typeof(IEvent).IsAssignableFrom(x))
+            .Where(x => typeof(IEvent).IsAssignableFrom(x))
             .ToArray();
         
         services.AddSingleton<IModuleRegistry>(sp =>
@@ -81,7 +81,6 @@ public static class Extensions
                         ?.MakeGenericMethod(type)
                         .Invoke(eventDispatcher, new[] { @event }));
             }
-
             return registry;
         });
 

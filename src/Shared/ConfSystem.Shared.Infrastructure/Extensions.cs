@@ -75,13 +75,13 @@ internal static class Extensions
         services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
         services.AddSingleton<IClock, Clock>();
         
-        // auth registration
-        services.AddAuth(modules);
-        
         // events registration
         services.AddModuleRequest(assemblies);
         services.AddEvents(assemblies);
         services.AddMessaging();
+        
+        // auth registration
+        services.AddAuth(modules);
         
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
