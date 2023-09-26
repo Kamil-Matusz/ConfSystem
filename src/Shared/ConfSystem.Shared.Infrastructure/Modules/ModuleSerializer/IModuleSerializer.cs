@@ -1,4 +1,4 @@
-namespace ConfSystem.Shared.Infrastructure.Modules;
+namespace ConfSystem.Shared.Infrastructure.Modules.ModuleSerializer;
 
 public interface IModuleSerializer
 {

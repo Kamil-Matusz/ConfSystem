@@ -7,6 +7,7 @@ using ConfSystem.Shared.Infrastructure.Auth;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
+using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -76,8 +77,12 @@ internal static class Extensions
         
         // auth registration
         services.AddAuth(modules);
+        
         // events registration
+        services.AddModuleRequest(assemblies);
         services.AddEvents(assemblies);
+        services.AddMessaging();
+        
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>

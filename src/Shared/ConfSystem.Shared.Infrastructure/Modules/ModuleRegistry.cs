@@ -1,6 +1,4 @@
-using System.Collections;
-
-namespace ConfSystem.Shared.Infrastructure.Modules;
+namespace ConfSystem.Shared.Infrastructure.Modules.ModulesRegistry;
 
 internal sealed class ModuleRegistry : IModuleRegistry
 {

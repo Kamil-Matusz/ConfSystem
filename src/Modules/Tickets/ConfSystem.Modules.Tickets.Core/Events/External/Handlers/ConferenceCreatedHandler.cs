@@ -1,4 +1,3 @@
-using ConfSystem.Modules.Conferences.Messages.Events;
 using ConfSystem.Modules.Tickets.Core.DAL.Repositories.Conferences;
 using ConfSystem.Modules.Tickets.Core.Entities;
 using ConfSystem.Shared.Abstractions.Events;

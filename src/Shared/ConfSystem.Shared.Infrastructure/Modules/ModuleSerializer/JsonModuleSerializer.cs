@@ -1,19 +1,21 @@
-namespace ConfSystem.Shared.Infrastructure.Modules;
+using System.Text;
+using System.Text.Json;
+
+namespace ConfSystem.Shared.Infrastructure.Modules.ModuleSerializer;
 
 internal class JsonModuleSerializer : IModuleSerializer
 {
-    public byte[] Serializer<T>(T value)
+    private static readonly JsonSerializerOptions SerializerOptions = new()
     {
-        throw new NotImplementedException();
-    }
+        PropertyNameCaseInsensitive = true
+    };
+
+    public byte[] Serializer<T>(T value)
+        => Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value, SerializerOptions));
 
     public T Deserialize<T>(byte[] value)
-    {
-        throw new NotImplementedException();
-    }
+        => JsonSerializer.Deserialize<T>(Encoding.UTF8.GetString(value), SerializerOptions);
 
     public object Deserialize(byte[] value, Type type)
-    {
-        throw new NotImplementedException();
-    }
+        => JsonSerializer.Deserialize(Encoding.UTF8.GetString(value), type, SerializerOptions);
 }

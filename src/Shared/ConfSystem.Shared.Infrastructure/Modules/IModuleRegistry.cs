@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace ConfSystem.Shared.Infrastructure.Modules;
 
 public interface IModuleRegistry
