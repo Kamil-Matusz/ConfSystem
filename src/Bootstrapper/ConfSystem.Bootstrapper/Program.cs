@@ -3,9 +3,7 @@ using ConfSystem.Bootstrapper;
 using ConfSystem.Modules.Conferences.Api;
 using ConfSystem.Modules.Speakers.Api;
 using ConfSystem.Modules.Tickets.Api;
-using ConfSystem.Modules.Tickets.Core.Events.External;
 using ConfSystem.Modules.Users.Api;
-using ConfSystem.Shared.Abstractions.Events;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure;
 using ConfSystem.Shared.Infrastructure.Modules;
@@ -38,3 +36,6 @@ app.MapModuleInfo();
 app.MapControllers();
 
 app.Run();
+
+_assemblies.Clear();
+_modules.Clear();

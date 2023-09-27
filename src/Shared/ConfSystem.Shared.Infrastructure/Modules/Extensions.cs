@@ -2,7 +2,6 @@ using System.Reflection;
 using ConfSystem.Shared.Abstractions.Events;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Modules.ModuleSerializer;
-using ConfSystem.Shared.Infrastructure.Modules.ModulesRegistry;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -65,24 +64,25 @@ public static class Extensions
     {
         var registry = new ModuleRegistry();
         var types = assemblies.SelectMany(x => x.GetTypes()).ToArray();
-        var eventTypes = types
-            .Where(x => typeof(IEvent).IsAssignableFrom(x))
-            .ToArray();
         
+        var eventTypes = types
+            .Where(x => x.IsClass && typeof(IEvent).IsAssignableFrom(x))
+            .ToArray();
+
         services.AddSingleton<IModuleRegistry>(sp =>
         {
             var eventDispatcher = sp.GetRequiredService<IEventDispatcher>();
             var eventDispatcherType = eventDispatcher.GetType();
-
+            
             foreach (var type in eventTypes)
             {
                 registry.AddBroadcastAction(type, @event =>
-                    (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
+                    (Task) eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))
                         ?.MakeGenericMethod(type)
-                        .Invoke(eventDispatcher, new[] { @event }));
+                        .Invoke(eventDispatcher, new[] {@event}));
             }
+
             return registry;
         });
-
     }
 }

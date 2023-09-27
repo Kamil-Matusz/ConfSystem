@@ -16,7 +16,6 @@ internal sealed class EventDispatcher : IEventDispatcher
     {
         using var scope = _serviceProvider.CreateScope();
         var handlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();
-
         var tasks = handlers.Select(x => x.HandleAsync(@event));
         await Task.WhenAll(tasks);
     }
