@@ -7,8 +7,6 @@ using ConfSystem.Modules.Conferences.Core.Repositories;
 using ConfSystem.Modules.Conferences.Core.Repositories.Conference;
 using ConfSystem.Shared.Abstractions.Events;
 using ConfSystem.Shared.Abstractions.Messaging;
-using ConfSystem.Shared.Abstractions.Modules;
-using ConferencedCreated = ConfSystem.Modules.Conferences.Core.Events.ConferenceCreated;
 
 namespace ConfSystem.Modules.Conferences.Core.Services;
 
