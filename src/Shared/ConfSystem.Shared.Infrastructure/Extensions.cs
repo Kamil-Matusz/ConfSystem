@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using ConfSystem.Shared.Abstractions;
 using ConfSystem.Shared.Abstractions.Modules;
@@ -5,6 +6,8 @@ using ConfSystem.Shared.Infrastructure.Api;
 using ConfSystem.Shared.Infrastructure.Auth;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
+using ConfSystem.Shared.Infrastructure.Events;
+using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -20,8 +23,26 @@ internal static class Extensions
 {
     private const string CorsPolicy = "cors";
     
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<IModule> modules)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<IModule> modules, IList<Assembly> assemblies)
     {
+        // modules list
+        var disabledModules = new List<string>();
+        using (var serviceProvider = services.BuildServiceProvider())
+        {
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            foreach (var (key, value) in configuration.AsEnumerable())
+            {
+                if (!key.Contains(":module:enabled"))
+                {
+                    continue;
+                }
+
+                if (!bool.Parse(value))
+                {
+                    disabledModules.Add(key.Split(":")[0]);
+                }
+            }
+        }
         // CORS Policy
         services.AddCors(cors =>
         {
@@ -53,7 +74,15 @@ internal static class Extensions
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
         services.AddSingleton<IClock, Clock>();
+        
+        // events registration
+        services.AddModuleRequest(assemblies);
+        services.AddEvents(assemblies);
+        services.AddMessaging();
+        
+        // auth registration
         services.AddAuth(modules);
+        
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>

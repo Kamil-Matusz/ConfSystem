@@ -27,6 +27,7 @@ internal static class Extensions
         
         services.AddScoped<IHostService, HostService>();
         services.AddScoped<IConferenceService, ConferenceService>();
+
         return services;
     }
 }

@@ -1,5 +1,5 @@
 {
-  "conferences": {
+  "users": {
     "module": {
       "name": "Users",
       "enabled": true

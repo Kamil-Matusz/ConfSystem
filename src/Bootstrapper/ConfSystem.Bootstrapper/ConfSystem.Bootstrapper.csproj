@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Modules\Conferences\ConfSystem.Modules.Conferences.Api\ConfSystem.Modules.Conferences.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Speakers\ConfSystem.Modules.Speakers.Api\ConfSystem.Modules.Speakers.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Tickets\ConfSystem.Modules.Tickets.Api\ConfSystem.Modules.Tickets.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Users\ConfSystem.Modules.Users.Api\ConfSystem.Modules.Users.Api.csproj" />
       <ProjectReference Include="..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
     </ItemGroup>
