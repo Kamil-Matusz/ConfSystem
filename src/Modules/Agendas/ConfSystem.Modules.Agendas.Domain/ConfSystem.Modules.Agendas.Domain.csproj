@@ -10,4 +10,17 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Abstractions\ConfSystem.Shared.Abstractions.csproj" />
+    </ItemGroup>
+
+
+
+
+
+
+
+
+
 </Project>
