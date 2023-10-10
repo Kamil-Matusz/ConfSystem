@@ -1,17 +1,21 @@
 using ConfSystem.Modules.Speakers.Core.DAL.Repositories;
 using ConfSystem.Modules.Speakers.Core.DTO;
+using ConfSystem.Modules.Speakers.Core.Events;
 using ConfSystem.Modules.Speakers.Core.Exceptions;
 using ConfSystem.Modules.Speakers.Core.Mappings;
+using ConfSystem.Shared.Abstractions.Messaging;
 
 namespace ConfSystem.Modules.Speakers.Core.Services;
 
 internal class SpeakersService : ISpeakersService
 {
     private readonly ISpeakersRepository _speakersRepository;
+    private readonly IMessageBroker _messageBroker;
 
-    public SpeakersService(ISpeakersRepository speakersRepository)
+    public SpeakersService(ISpeakersRepository speakersRepository, IMessageBroker messageBroker)
     {
         _speakersRepository = speakersRepository;
+        _messageBroker = messageBroker;
     }
     
     public async Task<IEnumerable<SpeakerDto>> GetAllSpeakersAsync()
@@ -35,6 +39,7 @@ internal class SpeakersService : ISpeakersService
         }
 
         await _speakersRepository.AddSpeakerAsync(speaker.AsEntity());
+        await _messageBroker.PublishAsync(new SpeakerCreated(speaker.SpeakerId, speaker.FullName)); 
     }
 
     public async Task UpdateSpeakerAsync(SpeakerDto speaker)
