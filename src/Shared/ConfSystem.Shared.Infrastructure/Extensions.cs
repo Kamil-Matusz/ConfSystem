@@ -4,6 +4,7 @@ using ConfSystem.Shared.Abstractions;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Api;
 using ConfSystem.Shared.Infrastructure.Auth;
+using ConfSystem.Shared.Infrastructure.Commands;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
@@ -79,6 +80,8 @@ internal static class Extensions
         services.AddModuleRequest(assemblies);
         services.AddEvents(assemblies);
         services.AddMessaging();
+
+        services.AddCommands(assemblies);
         
         // auth registration
         services.AddAuth(modules);

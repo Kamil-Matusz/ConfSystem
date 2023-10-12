@@ -8,7 +8,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ConfSystem.Modules.Agendas.Domain\ConfSystem.Modules.Agendas.Domain.csproj" />
+
+
     </ItemGroup>
+
 
 
 
