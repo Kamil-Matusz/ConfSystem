@@ -10,6 +10,7 @@ using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
 using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
+using ConfSystem.Shared.Infrastructure.Queries;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -81,7 +82,9 @@ internal static class Extensions
         services.AddEvents(assemblies);
         services.AddMessaging();
 
+        // CQRS
         services.AddCommands(assemblies);
+        services.AddQueries(assemblies);
         
         // auth registration
         services.AddAuth(modules);
