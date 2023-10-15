@@ -13,6 +13,7 @@ public sealed class Submission : AggregateRoot
     public int Level { get; private set; }
     public string Status { get; private set; }
     public IEnumerable<string> Tags { get; private set; }
+    // many to many EF relations
     public IEnumerable<Speaker> Speakers => _speakers;
 
     private ICollection<Speaker> _speakers;

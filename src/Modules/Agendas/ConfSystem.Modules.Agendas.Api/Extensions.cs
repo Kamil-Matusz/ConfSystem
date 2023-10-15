@@ -1,8 +1,10 @@
+using System.Runtime.CompilerServices;
 using ConfSystem.Modules.Agendas.Application;
 using ConfSystem.Modules.Agendas.Domain;
 using ConfSystem.Modules.Agendas.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
+[assembly: InternalsVisibleTo("ConfSystem.Bootstrapper")]
 namespace ConfSystem.Modules.Agendas.Api;
 
 internal static class Extensions

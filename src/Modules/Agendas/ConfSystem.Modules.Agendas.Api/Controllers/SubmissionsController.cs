@@ -1,5 +1,8 @@
 using ConfSystem.Modules.Agendas.Application.Submissions.Commands;
+using ConfSystem.Modules.Agendas.Application.Submissions.DTO;
+using ConfSystem.Modules.Agendas.Application.Submissions.Queries;
 using ConfSystem.Shared.Abstractions.Commands;
+using ConfSystem.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfSystem.Modules.Agendas.Api.Controllers;
@@ -7,12 +10,18 @@ namespace ConfSystem.Modules.Agendas.Api.Controllers;
 internal class SubmissionsController : BaseController
 {
     private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IQueryDispatcher _queryDispatcher;
 
-    public SubmissionsController(ICommandDispatcher commandDispatcher)
+    public SubmissionsController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
     {
         _commandDispatcher = commandDispatcher;
+        _queryDispatcher = queryDispatcher;
     }
 
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<SubmissionDto>> GetAsync(Guid id)
+        => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetSubmission { Id = id }));
+    
     [HttpPost]
     public async Task<ActionResult> CreateSubmissionAsync(CreateSubmission command)
     {
