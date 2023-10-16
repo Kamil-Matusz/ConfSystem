@@ -8,6 +8,7 @@ using ConfSystem.Shared.Infrastructure.Commands;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
+using ConfSystem.Shared.Infrastructure.Kernel;
 using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.Queries;
@@ -80,6 +81,7 @@ internal static class Extensions
         // events registration
         services.AddModuleRequest(assemblies);
         services.AddEvents(assemblies);
+        services.AddDomainEvents(assemblies);
         services.AddMessaging();
 
         // CQRS

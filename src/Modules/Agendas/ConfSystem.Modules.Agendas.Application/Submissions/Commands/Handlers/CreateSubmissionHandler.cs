@@ -3,6 +3,7 @@ using ConfSystem.Modules.Agendas.Application.Exceptions;
 using ConfSystem.Modules.Agendas.Domain.Submissions.Entities;
 using ConfSystem.Modules.Agendas.Domain.Submissions.Repositories;
 using ConfSystem.Shared.Abstractions.Commands;
+using ConfSystem.Shared.Abstractions.Kernel;
 using ConfSystem.Shared.Abstractions.Kernel.Types;
 
 namespace ConfSystem.Modules.Agendas.Application.Submissions.Commands.Handlers;
@@ -11,11 +12,13 @@ public sealed class CreateSubmissionHandler : ICommandHandler<CreateSubmission>
 {
     private readonly ISubmissionRepository _submissionRepository;
     private readonly ISpeakerRepository _speakerRepository;
+    private readonly IDomainEventDispatcher _domainEventDispatcher;
 
-    public CreateSubmissionHandler(ISubmissionRepository submissionRepository, ISpeakerRepository speakerRepository)
+    public CreateSubmissionHandler(ISubmissionRepository submissionRepository, ISpeakerRepository speakerRepository, IDomainEventDispatcher domainEventDispatcher)
     {
         _submissionRepository = submissionRepository;
         _speakerRepository = speakerRepository;
+        _domainEventDispatcher = domainEventDispatcher;
     }
 
     public async Task HandleAsync(CreateSubmission command)
@@ -31,5 +34,6 @@ public sealed class CreateSubmissionHandler : ICommandHandler<CreateSubmission>
         var submission = Submission.Create(command.Id, command.ConferenceId, command.Title, command.Description, command.Level, command.Tags, speakers.ToList());
 
         await _submissionRepository.AddAsync(submission);
+        await _domainEventDispatcher.DispatchAsync(submission.Events.ToArray());
     }
 }
