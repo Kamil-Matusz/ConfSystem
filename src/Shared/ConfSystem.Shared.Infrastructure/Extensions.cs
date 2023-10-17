@@ -4,11 +4,14 @@ using ConfSystem.Shared.Abstractions;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Api;
 using ConfSystem.Shared.Infrastructure.Auth;
+using ConfSystem.Shared.Infrastructure.Commands;
 using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
+using ConfSystem.Shared.Infrastructure.Kernel;
 using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
+using ConfSystem.Shared.Infrastructure.Queries;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -78,7 +81,12 @@ internal static class Extensions
         // events registration
         services.AddModuleRequest(assemblies);
         services.AddEvents(assemblies);
+        services.AddDomainEvents(assemblies);
         services.AddMessaging();
+
+        // CQRS
+        services.AddCommands(assemblies);
+        services.AddQueries(assemblies);
         
         // auth registration
         services.AddAuth(modules);

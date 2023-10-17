@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Abstractions\ConfSystem.Shared.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\ConfSystem.Modules.Agendas.Infrastructure\ConfSystem.Modules.Agendas.Infrastructure.csproj" />
     </ItemGroup>
 
 

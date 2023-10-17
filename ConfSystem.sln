@@ -40,6 +40,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Tickets.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Tickets.Core", "src\Modules\Tickets\ConfSystem.Modules.Tickets.Core\ConfSystem.Modules.Tickets.Core.csproj", "{E2CACFAB-7926-4CF3-A262-D182E6665A88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Agendas", "Agendas", "{1890FED9-8A5F-4388-9D20-C2C2FEA426E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Agendas.Domain", "src\Modules\Agendas\ConfSystem.Modules.Agendas.Domain\ConfSystem.Modules.Agendas.Domain.csproj", "{CCF459BF-452D-4E93-BFC6-176432309BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Agendas.Application", "src\Modules\Agendas\ConfSystem.Modules.Agendas.Application\ConfSystem.Modules.Agendas.Application.csproj", "{AB2A53F9-FB27-4173-B518-3C22C980A1EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Agendas.Infrastructure", "src\Modules\Agendas\ConfSystem.Modules.Agendas.Infrastructure\ConfSystem.Modules.Agendas.Infrastructure.csproj", "{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Agendas.Api", "src\Modules\Agendas\ConfSystem.Modules.Agendas.Api\ConfSystem.Modules.Agendas.Api.csproj", "{1E924A57-D862-4F45-B10E-9E093B36D876}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +100,22 @@ Global
 		{E2CACFAB-7926-4CF3-A262-D182E6665A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2CACFAB-7926-4CF3-A262-D182E6665A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2CACFAB-7926-4CF3-A262-D182E6665A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCF459BF-452D-4E93-BFC6-176432309BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCF459BF-452D-4E93-BFC6-176432309BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCF459BF-452D-4E93-BFC6-176432309BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCF459BF-452D-4E93-BFC6-176432309BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2A53F9-FB27-4173-B518-3C22C980A1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2A53F9-FB27-4173-B518-3C22C980A1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2A53F9-FB27-4173-B518-3C22C980A1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2A53F9-FB27-4173-B518-3C22C980A1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E924A57-D862-4F45-B10E-9E093B36D876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E924A57-D862-4F45-B10E-9E093B36D876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E924A57-D862-4F45-B10E-9E093B36D876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E924A57-D862-4F45-B10E-9E093B36D876}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A352BB4F-140C-4C86-992E-D35448E8EFC3} = {3D41970A-3907-4B35-8B4E-872D16320934}
@@ -110,5 +136,10 @@ Global
 		{E487CCC4-3FB7-484A-BDCA-F43EC70122AB} = {14819281-5EBA-4705-B299-029D5F1DE2C8}
 		{5DF32A93-AA94-4EB5-A0E7-0B9F59A6FF00} = {E487CCC4-3FB7-484A-BDCA-F43EC70122AB}
 		{E2CACFAB-7926-4CF3-A262-D182E6665A88} = {E487CCC4-3FB7-484A-BDCA-F43EC70122AB}
+		{1890FED9-8A5F-4388-9D20-C2C2FEA426E4} = {14819281-5EBA-4705-B299-029D5F1DE2C8}
+		{CCF459BF-452D-4E93-BFC6-176432309BEA} = {1890FED9-8A5F-4388-9D20-C2C2FEA426E4}
+		{AB2A53F9-FB27-4173-B518-3C22C980A1EF} = {1890FED9-8A5F-4388-9D20-C2C2FEA426E4}
+		{36BB1CB8-D305-4ED3-BF25-3CBC8E18BEE9} = {1890FED9-8A5F-4388-9D20-C2C2FEA426E4}
+		{1E924A57-D862-4F45-B10E-9E093B36D876} = {1890FED9-8A5F-4388-9D20-C2C2FEA426E4}
 	EndGlobalSection
 EndGlobal

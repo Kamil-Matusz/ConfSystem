@@ -7,16 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-      <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.15.1" />
-
-
-
-
-
-
     </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Abstractions\ConfSystem.Shared.Abstractions.csproj" />
+    </ItemGroup>
+
+
+
+
+
 
 
 

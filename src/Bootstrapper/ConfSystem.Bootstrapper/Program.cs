@@ -1,5 +1,6 @@
 using System.Reflection;
 using ConfSystem.Bootstrapper;
+using ConfSystem.Modules.Agendas.Api;
 using ConfSystem.Modules.Conferences.Api;
 using ConfSystem.Modules.Speakers.Api;
 using ConfSystem.Modules.Tickets.Api;
@@ -23,7 +24,8 @@ builder.Services
     .AddConferences()
     .AddSpeakers()
     .AddUsers()
-    .AddTickets();
+    .AddTickets()
+    .AddAgendas();
 
 var app = builder.Build();
 

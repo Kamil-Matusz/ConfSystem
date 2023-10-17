@@ -7,9 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Abstractions\ConfSystem.Shared.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\Shared\ConfSystem.Shared.Infrastructure\ConfSystem.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\ConfSystem.Modules.Agendas.Domain\ConfSystem.Modules.Agendas.Domain.csproj" />
+
+
+
+
     </ItemGroup>
+
+
 
 
 </Project>
