@@ -1,4 +1,8 @@
+using ConfSystem.Modules.Agendas.Application.Agendas.DTO;
+using ConfSystem.Modules.Agendas.Application.Agendas.Queries;
 using ConfSystem.Shared.Abstractions.Modules;
+using ConfSystem.Shared.Abstractions.Queries;
+using Microsoft.AspNetCore.Builder;
 
 namespace ConfSystem.Modules.Agendas.Api;
 
