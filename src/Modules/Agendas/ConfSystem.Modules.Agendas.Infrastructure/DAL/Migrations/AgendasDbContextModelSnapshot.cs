@@ -23,9 +23,125 @@ namespace ConfSystem.Modules.Agendas.Infrastructure.DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AgendaSlotId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ConferenceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgendaSlotId");
+
+                    b.ToTable("AgendaItems", "agendas");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("TrackId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrackId");
+
+                    b.ToTable("AgendaSlots", "agendas");
+
+                    b.HasDiscriminator<string>("Type").HasValue("AgendaSlot");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaTrack", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ConferenceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AgendaTracks", "agendas");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.CallForPapers.Entities.CallForPapers", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ConferenceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsOpened")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CallForPapers", "agendas");
+                });
+
             modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Submissions.Entities.Speaker", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("AgendaItemId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("FullName")
@@ -37,6 +153,8 @@ namespace ConfSystem.Modules.Agendas.Infrastructure.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AgendaItemId");
 
                     b.ToTable("Speakers", "agendas");
                 });
@@ -92,6 +210,61 @@ namespace ConfSystem.Modules.Agendas.Infrastructure.DAL.Migrations
                     b.ToTable("SpeakerSubmission", "agendas");
                 });
 
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.PlaceholderAgendaSlot", b =>
+                {
+                    b.HasBaseType("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot");
+
+                    b.Property<string>("Placeholder")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasDiscriminator().HasValue("placeholder");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.RegularAgendaSlot", b =>
+                {
+                    b.HasBaseType("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot");
+
+                    b.Property<Guid>("AgendaItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("ParticipantsLimit")
+                        .HasColumnType("integer");
+
+                    b.HasIndex("AgendaItemId");
+
+                    b.HasDiscriminator().HasValue("regular");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", b =>
+                {
+                    b.HasOne("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot", "AgendaSlot")
+                        .WithMany()
+                        .HasForeignKey("AgendaSlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgendaSlot");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot", b =>
+                {
+                    b.HasOne("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaTrack", "Track")
+                        .WithMany("Slots")
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Track");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Submissions.Entities.Speaker", b =>
+                {
+                    b.HasOne("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", null)
+                        .WithMany("Speakers")
+                        .HasForeignKey("AgendaItemId");
+                });
+
             modelBuilder.Entity("SpeakerSubmission", b =>
                 {
                     b.HasOne("ConfSystem.Modules.Agendas.Domain.Submissions.Entities.Speaker", null)
@@ -105,6 +278,27 @@ namespace ConfSystem.Modules.Agendas.Infrastructure.DAL.Migrations
                         .HasForeignKey("SubmissionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.RegularAgendaSlot", b =>
+                {
+                    b.HasOne("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", "AgendaItem")
+                        .WithMany()
+                        .HasForeignKey("AgendaItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgendaItem");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", b =>
+                {
+                    b.Navigation("Speakers");
+                });
+
+            modelBuilder.Entity("ConfSystem.Modules.Agendas.Domain.Agendas.Entities.AgendaTrack", b =>
+                {
+                    b.Navigation("Slots");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,4 +18,6 @@ internal class BaseController : ControllerBase
 
         return Ok(model);
     }
+    
+    protected void AddResourceIdHeader(Guid id) => Response.Headers.Add("Resource-ID", id.ToString());
 }

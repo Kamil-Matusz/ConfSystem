@@ -1,3 +1,5 @@
+using ConfSystem.Modules.Agendas.Domain.Agendas.Repositories;
+using ConfSystem.Modules.Agendas.Domain.CallForPapers.Repositories;
 using ConfSystem.Modules.Agendas.Domain.Submissions.Repositories;
 using ConfSystem.Modules.Agendas.Infrastructure.DAL;
 using ConfSystem.Modules.Agendas.Infrastructure.DAL.Repositories;
@@ -13,6 +15,9 @@ public static class Extensions
         services.AddPostgres<AgendasDbContext>();
         services.AddScoped<ISpeakerRepository, SpeakerRepository>();
         services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+        services.AddScoped<ICallForPapersRepository, CallForPapersRepository>();
+        services.AddScoped<IAgendaItemsRepository, AgendaItemsRepository>();
+        services.AddScoped<IAgendaTracksRepository, AgendaTracksRepository>();
         return services;
     } 
 }
