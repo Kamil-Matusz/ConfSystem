@@ -31,6 +31,7 @@ public static class Extensions
         services.AddModuleRegistry(assemblies);
         services.AddSingleton<IModuleClient, ModuleClient>();
         services.AddSingleton<IModuleSerializer, JsonModuleSerializer>();
+        services.AddSingleton<IModuleSubscriber, ModuleSubscriber>();
         return services;
     }
     
@@ -42,6 +43,9 @@ public static class Extensions
             return context.Response.WriteAsJsonAsync(moduleInfoProvicer.Modules);
         });
     }
+
+    public static IModuleSubscriber UseModuleRequests(this IApplicationBuilder app)
+        => app.ApplicationServices.GetRequiredService<IModuleSubscriber>();
     
     public static IHostBuilder ConfigureModules(this IHostBuilder builder)
         => builder.ConfigureAppConfiguration((ctx, cfg) =>
