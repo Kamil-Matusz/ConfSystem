@@ -10,7 +10,8 @@ internal static class Extensions
     {
         //Scrutor scan assemblies
         services.Scan(s => s.FromAssemblies(assemblies)
-            .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
+            .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>))
+                .WithoutAttribute<DecoratorAttribute>())
             .AsImplementedInterfaces()
             .WithScopedLifetime());
         services.AddSingleton<IEventDispatcher, EventDispatcher>();

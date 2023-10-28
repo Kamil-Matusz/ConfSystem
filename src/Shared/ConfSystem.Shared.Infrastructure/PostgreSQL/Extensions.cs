@@ -1,3 +1,5 @@
+using ConfSystem.Shared.Abstractions.Commands;
+using ConfSystem.Shared.Infrastructure.PostgreSQL.Decorators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -5,11 +7,18 @@ namespace ConfSystem.Shared.Infrastructure.PostgreSQL;
 
 public static class Extensions
 {
-    internal static IServiceCollection AddPostgres(IServiceCollection services)
+    internal static IServiceCollection AddPostgres(this IServiceCollection services)
     {
         var options = services.GetOptions<PostgresOptions>("postgres");
         services.AddSingleton(options);
-        
+        services.AddSingleton(new UnitOfWorkTypeRegistry());
+            
+        return services;
+    }
+    
+    public static IServiceCollection AddTransactionalDecorators(this IServiceCollection services)
+    {
+        services.TryDecorate(typeof(ICommandHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
         return services;
     }
 
@@ -26,6 +35,9 @@ public static class Extensions
     {
         services.AddScoped<TUnitOfWork, TImplementation>();
         services.AddScoped<IUnitOfWork, TImplementation>();
+
+        using var serviceProvider = services.BuildServiceProvider();
+        serviceProvider.GetRequiredService<UnitOfWorkTypeRegistry>().Register<TUnitOfWork>();
 
         return services;
     }
