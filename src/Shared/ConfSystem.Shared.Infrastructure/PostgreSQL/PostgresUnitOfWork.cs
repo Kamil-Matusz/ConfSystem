@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfSystem.Shared.Infrastructure.PostgreSQL;
 
-public abstract class UnitOfWork<T> : IUnitOfWork where T : DbContext
+public abstract class PostgresUnitOfWork<T> : IUnitOfWork where T : DbContext
 {
     private readonly T _dbContext;
-    protected UnitOfWork(T dbContext)
+    protected PostgresUnitOfWork(T dbContext)
     {
         _dbContext = dbContext;
     }
