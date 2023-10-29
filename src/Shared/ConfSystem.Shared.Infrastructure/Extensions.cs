@@ -11,6 +11,7 @@ using ConfSystem.Shared.Infrastructure.Events;
 using ConfSystem.Shared.Infrastructure.Kernel;
 using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
+using ConfSystem.Shared.Infrastructure.PostgreSQL;
 using ConfSystem.Shared.Infrastructure.Queries;
 using ConfSystem.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -76,6 +77,7 @@ internal static class Extensions
         services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
+        
         services.AddSingleton<IClock, Clock>();
         
         // events registration
@@ -83,6 +85,10 @@ internal static class Extensions
         services.AddEvents(assemblies);
         services.AddDomainEvents(assemblies);
         services.AddMessaging();
+        
+        // decorators
+        services.AddPostgres();
+        services.AddTransactionalDecorators();
 
         // CQRS
         services.AddCommands(assemblies);
@@ -128,5 +134,20 @@ internal static class Extensions
         var options = new T();
         configuration.GetSection(sectionName).Bind(options);
         return options;
+    }
+    
+    public static string GetModuleName(this object value)
+        => value?.GetType().GetModuleName() ?? string.Empty;
+    
+    public static string GetModuleName(this Type type)
+    {
+        if (type?.Namespace is null)
+        {
+            return string.Empty;
+        }
+
+        return type.Namespace.StartsWith("ConfSystem.Modules.")
+            ? type.Namespace.Split(".")[2].ToLowerInvariant()
+            : string.Empty;
     }
 }

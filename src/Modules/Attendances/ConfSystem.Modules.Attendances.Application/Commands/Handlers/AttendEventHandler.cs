@@ -15,7 +15,7 @@ internal sealed class AttendEventHandler : ICommandHandler<AttendEvent>
         _attendableEventsRepository = attendableEventsRepository;
         _participantsRepository = participantsRepository;
     }
-        
+    
     public async Task HandleAsync(AttendEvent command)
     {
         var attendableEvent = await _attendableEventsRepository.GetAttendableEventAsync(command.Id);

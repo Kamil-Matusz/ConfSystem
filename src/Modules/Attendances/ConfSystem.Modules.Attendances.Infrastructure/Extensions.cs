@@ -16,6 +16,7 @@ public static class Extensions
         services.AddScoped<IAttendableEventsRepository, AttendableEventsRepository>();
         services.AddScoped<IParticipantsRepository, ParticipantsRepository>();
         services.AddSingleton<IAgendasApiClient, AgendasApiClient>();
+        services.AddUnitOfWork<IAttendancesUnitOfWork, AttendancesUnitOfWork>();
         return services;
     } 
 }
