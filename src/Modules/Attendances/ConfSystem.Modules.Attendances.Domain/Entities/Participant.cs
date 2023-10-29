@@ -1,3 +1,4 @@
+using ConfSystem.Modules.Attendances.Domain.Events;
 using ConfSystem.Modules.Attendances.Domain.Exceptions;
 using ConfSystem.Modules.Attendances.Domain.Types;
 using ConfSystem.Shared.Abstractions.Kernel.Types;
@@ -38,7 +39,7 @@ public class Participant : AggregateRoot<ParticipantId>
         }
             
         _attendances.Add(attendance);
-        //AddEvent(new ParticipantAttendedToEvent(this, attendance));
+        AddEvent(new ParticipantAttendedToEvent(this, attendance));
     }
 
     private bool HasCollision(Attendance attendance)
