@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("ConfSystem.Bootstrapper")]
+[assembly: InternalsVisibleTo("ConfSystem.Shared.Tests")]
 namespace ConfSystem.Shared.Infrastructure;
 
 internal static class Extensions
