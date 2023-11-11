@@ -45,6 +45,9 @@ internal sealed class ModuleClient : IModuleClient
         return result is null ? null : TranslateType<TResult>(result);
     }
 
+    public Task SendAsync(string path, object request)
+        => SendAsync<object>(path, request);
+
     private object TranslateType(object value, Type type)
         => _moduleSerializer.Deserialize(_moduleSerializer.Serializer(value), type);
 
