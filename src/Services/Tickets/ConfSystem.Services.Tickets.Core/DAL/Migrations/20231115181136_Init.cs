@@ -3,20 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
+namespace ConfSystem.Services.Tickets.Core.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Tickets_Module_Init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "tickets");
-
             migrationBuilder.CreateTable(
                 name: "Conferences",
-                schema: "tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -32,7 +28,6 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
 
             migrationBuilder.CreateTable(
                 name: "TicketSales",
-                schema: "tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -49,7 +44,6 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
                     table.ForeignKey(
                         name: "FK_TicketSales_Conferences_ConferenceId",
                         column: x => x.ConferenceId,
-                        principalSchema: "tickets",
                         principalTable: "Conferences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -57,7 +51,6 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Tickets",
-                schema: "tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -76,14 +69,12 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
                     table.ForeignKey(
                         name: "FK_Tickets_Conferences_ConferenceId",
                         column: x => x.ConferenceId,
-                        principalSchema: "tickets",
                         principalTable: "Conferences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tickets_TicketSales_TicketSaleId",
                         column: x => x.TicketSaleId,
-                        principalSchema: "tickets",
                         principalTable: "TicketSales",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -91,26 +82,22 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_Code",
-                schema: "tickets",
                 table: "Tickets",
                 column: "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ConferenceId",
-                schema: "tickets",
                 table: "Tickets",
                 column: "ConferenceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_TicketSaleId",
-                schema: "tickets",
                 table: "Tickets",
                 column: "TicketSaleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TicketSales_ConferenceId",
-                schema: "tickets",
                 table: "TicketSales",
                 column: "ConferenceId");
         }
@@ -119,16 +106,13 @@ namespace ConfSystem.Modules.Tickets.Core.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tickets",
-                schema: "tickets");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
-                name: "TicketSales",
-                schema: "tickets");
+                name: "TicketSales");
 
             migrationBuilder.DropTable(
-                name: "Conferences",
-                schema: "tickets");
+                name: "Conferences");
         }
     }
 }
