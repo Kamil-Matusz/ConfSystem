@@ -14,6 +14,8 @@ using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.PostgreSQL;
 using ConfSystem.Shared.Infrastructure.Queries;
 using ConfSystem.Shared.Infrastructure.Services;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -104,6 +106,13 @@ internal static class Extensions
             {
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
+        
+        // RabbitMQ
+        services
+            .AddConvey()
+            .AddRabbitMq()
+            .Build();
+        
         return services;
     }
 
