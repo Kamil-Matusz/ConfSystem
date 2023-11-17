@@ -18,6 +18,9 @@ using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.PostgreSQL;
 using ConfSystem.Shared.Infrastructure.Queries;
 using ConfSystem.Shared.Infrastructure.Services;
+using Convey;
+using Convey.CQRS.Events;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -56,6 +59,14 @@ internal static class Extensions
         
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers();
+        
+        // RabbitMq
+        services
+            .AddConvey()
+            .AddRabbitMq()
+            .AddEventHandlers()
+            .AddInMemoryEventDispatcher()
+            .Build();
         
         services.AddPostgres<TicketsDbContext>();
         services.AddScoped<IConferenceRepository, ConferenceRepository>();

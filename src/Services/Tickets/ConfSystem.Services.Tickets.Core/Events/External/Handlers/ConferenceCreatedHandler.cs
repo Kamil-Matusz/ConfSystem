@@ -1,6 +1,6 @@
 using ConfSystem.Services.Tickets.Core.DAL.Repositories.Conferences;
 using ConfSystem.Services.Tickets.Core.Entities;
-using ConfSystem.Shared.Abstractions.Events;
+using Convey.CQRS.Events;
 using Microsoft.Extensions.Logging;
 
 namespace ConfSystem.Services.Tickets.Core.Events.External.Handlers;
@@ -17,6 +17,21 @@ internal sealed class ConferenceCreatedHandler : IEventHandler<ConferenceCreated
     }
 
     public async Task HandleAsync(ConferenceCreated @event)
+    {
+        var conference = new Conference
+        {
+            Id = @event.Id,
+            Name = @event.Name,
+            ParticipantsLimit = @event.ParticipantsLimit,
+            From = @event.From,
+            To = @event.To
+        };
+
+        await _conferenceRepository.AddConferenceAsync(conference);
+        _logger.LogInformation($"Added a conference with ID: '{@event.Id}'.");
+    }
+
+    public async Task HandleAsync(ConferenceCreated @event, CancellationToken cancellationToken = new CancellationToken())
     {
         var conference = new Conference
         {
