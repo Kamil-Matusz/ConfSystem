@@ -72,6 +72,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tickets", "Tickets", "{4604
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Services.Tickets.Core", "src\Services\Tickets\ConfSystem.Services.Tickets.Core\ConfSystem.Services.Tickets.Core.csproj", "{292FD9D3-0067-40BE-B482-8EC8952AC740}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Gateway", "API_Gateway", "{17CC8F59-8291-4ECD-9741-FEBCEE8C0E65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Api_Gateway", "src\Gateway\ConfSystem.Api_Gateway\ConfSystem.Api_Gateway.csproj", "{24FBC18B-7752-4CF8-A343-D3172441A237}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +170,10 @@ Global
 		{292FD9D3-0067-40BE-B482-8EC8952AC740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{292FD9D3-0067-40BE-B482-8EC8952AC740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{292FD9D3-0067-40BE-B482-8EC8952AC740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24FBC18B-7752-4CF8-A343-D3172441A237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24FBC18B-7752-4CF8-A343-D3172441A237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24FBC18B-7752-4CF8-A343-D3172441A237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24FBC18B-7752-4CF8-A343-D3172441A237}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A352BB4F-140C-4C86-992E-D35448E8EFC3} = {3D41970A-3907-4B35-8B4E-872D16320934}
@@ -202,5 +210,6 @@ Global
 		{46046C03-52E7-4276-AE6A-A0BD37BBCFF5} = {E3DF3ADC-4371-46FE-B737-AC15E86EB103}
 		{890325E2-3A98-4C3C-9845-9BA094391D5C} = {46046C03-52E7-4276-AE6A-A0BD37BBCFF5}
 		{292FD9D3-0067-40BE-B482-8EC8952AC740} = {46046C03-52E7-4276-AE6A-A0BD37BBCFF5}
+		{24FBC18B-7752-4CF8-A343-D3172441A237} = {17CC8F59-8291-4ECD-9741-FEBCEE8C0E65}
 	EndGlobalSection
 EndGlobal
