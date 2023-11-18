@@ -5,11 +5,13 @@ ConfSystem is project using modular monolith architecture written in <b>.NET 7.0
 Depending on the module complexity, different architectural styles are being used, including simple CRUD approach, along with CQRS, Clean Architecture and Domain-Driven Design with the usage of so-called building blocks such as aggregates or domain services.
 
 ## Stack & Technologies:
-- C# 12
+- C# 11
 - .NET 7.0
 - Entity Framework Core
 - PostgreSQL
 - Docker
+- RabbitMQ
+- YARP
 
 ## Database
 The project uses a Postgres database using Docker. Docker settings are in the <b>docker-compose.yml</b> file.
