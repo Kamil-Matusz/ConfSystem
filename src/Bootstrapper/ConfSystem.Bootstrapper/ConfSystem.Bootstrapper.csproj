@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <ItemGroup>
       <ProjectReference Include="..\..\Modules\Agendas\ConfSystem.Modules.Agendas.Api\ConfSystem.Modules.Agendas.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Attendances\ConfSystem.Modules.Attendances.Api\ConfSystem.Modules.Attendances.Api.csproj" />

@@ -1,6 +1,7 @@
 using ConfSystem.Shared.Abstractions.Messaging;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure.Messaging.Dispatchers;
+using Convey.MessageBrokers;
 
 namespace ConfSystem.Shared.Infrastructure.Messaging.Brokers;
 
@@ -9,12 +10,14 @@ internal sealed class InMemoryMessageBroker : IMessageBroker
     private readonly IModuleClient _moduleClient;
     private readonly IAsyncMessageDispatcher _asyncMessageDispatcher;
     private readonly MessagingOptions _messagingOptions;
+    private readonly IBusPublisher _busPublisher;
 
-    public InMemoryMessageBroker(IModuleClient moduleClient, IAsyncMessageDispatcher asyncMessageDispatcher, MessagingOptions messagingOptions)
+    public InMemoryMessageBroker(IModuleClient moduleClient, IAsyncMessageDispatcher asyncMessageDispatcher, MessagingOptions messagingOptions, IBusPublisher busPublisher)
     {
         _moduleClient = moduleClient;
         _asyncMessageDispatcher = asyncMessageDispatcher;
         _messagingOptions = messagingOptions;
+        _busPublisher = busPublisher;
     }
 
     public async Task PublishAsync(params IMessage[] messages)
@@ -34,6 +37,7 @@ internal sealed class InMemoryMessageBroker : IMessageBroker
         
         foreach (var message in messages)
         {
+            await _busPublisher.PublishAsync(message);
             if (_messagingOptions.UseBackgroundDispatcher)
             {
                 await _asyncMessageDispatcher.PublishAsync(message);

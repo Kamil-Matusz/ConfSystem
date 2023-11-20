@@ -10,6 +10,8 @@ using ConfSystem.Modules.Users.Api;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure;
 using ConfSystem.Shared.Infrastructure.Modules;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,10 @@ app.UseInfrastructure();
 app.MapGet("/", () => "Hello World!");
 
 app.MapModuleInfo();
+
+// Implemented RabbitMq
+app.UseConvey();
+app.UseRabbitMq();
 
 app.MapControllers();
 
