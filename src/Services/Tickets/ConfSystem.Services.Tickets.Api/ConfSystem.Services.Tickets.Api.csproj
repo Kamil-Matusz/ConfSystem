@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
     <ItemGroup>
       <ProjectReference Include="..\ConfSystem.Services.Tickets.Core\ConfSystem.Services.Tickets.Core.csproj" />
     </ItemGroup>
