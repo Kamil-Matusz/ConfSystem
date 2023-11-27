@@ -18,13 +18,20 @@ internal class HostController : BaseController
     }
 
     [AllowAnonymous]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<HostDetailsDto>> GetHost(Guid id) => OkOrNotFound(await _hostService.GetAsync(id));
 
     [AllowAnonymous]
+    [ProducesResponseType(200)]
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<HostDto>>> GetAllHostsAsync() => Ok(await _hostService.GetAllAsync());
 
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     [HttpPost]
     public async Task<ActionResult> CreateHostAsync(HostDto dto)
     {
@@ -35,6 +42,10 @@ internal class HostController : BaseController
         }, null);
     }
     
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> UpdateHostAsync(Guid id, HostDetailsDto dto)
     {
@@ -43,6 +54,10 @@ internal class HostController : BaseController
         return NoContent();
     }
     
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteHostAsync(Guid id)
     {

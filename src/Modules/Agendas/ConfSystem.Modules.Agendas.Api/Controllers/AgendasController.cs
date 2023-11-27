@@ -25,20 +25,27 @@ internal class AgendasController : BaseController
     
     [HttpGet]
     [AllowAnonymous]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<IEnumerable<AgendaTrackDto>>> GetAgendaAsync(Guid conferenceId) 
         => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetAgenda{ConferenceId = conferenceId}));
         
     [HttpGet("items")]
     [AllowAnonymous]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<IEnumerable<AgendaItemDto>>> BrowseAgendaItemsAsync(Guid conferenceId) 
         => OkOrNotFound(await _queryDispatcher.QueryAsync(new BrowseAgendaItems{ConferenceId = conferenceId}));
         
     [HttpGet("items/{id:guid}")]
     [AllowAnonymous]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<AgendaItemDto>> GetAgendaItemAsync(Guid id) 
         => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetAgendaItem{Id = id}));
 
     [HttpPost("tracks")]
+    [ProducesResponseType(204)]
     public async Task<ActionResult> CreateAgendaTrackAsync(Guid conferenceId, CreateAgendaTrack command)
     {
         await _commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
@@ -47,6 +54,7 @@ internal class AgendasController : BaseController
     }
         
     [HttpPost("slots")]
+    [ProducesResponseType(204)]
     public async Task<ActionResult> CreateAgendaSlotAsync(CreateAgendaSlot command)
     {
         await _commandDispatcher.SendAsync(command);
@@ -55,6 +63,7 @@ internal class AgendasController : BaseController
     }
         
     [HttpPut("slots/placeholder")]
+    [ProducesResponseType(204)]
     public async Task<ActionResult> AssignPlaceholderAgendaSlotAsync(AssignPlaceholderAgendaSlot command)
     {
         await _commandDispatcher.SendAsync(command);
@@ -62,6 +71,7 @@ internal class AgendasController : BaseController
     }
         
     [HttpPut("slots/regular")]
+    [ProducesResponseType(204)]
     public async Task<ActionResult> AssignRegularAgendaSlotAsync(AssignRegularAgendaSlot command)
     {
         await _commandDispatcher.SendAsync(command);

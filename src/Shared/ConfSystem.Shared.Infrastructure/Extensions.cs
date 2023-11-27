@@ -18,6 +18,7 @@ using Convey;
 using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -103,7 +104,19 @@ internal static class Extensions
         services.AddHostedService<DatabaseInitializer>();
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>
-            {
+            {var removedParts = new List<ApplicationPart>();
+                foreach (var disabledModule in disabledModules)
+                {
+                    var parts = manager.ApplicationParts.Where(x => x.Name.Contains(disabledModule,
+                        StringComparison.InvariantCultureIgnoreCase));
+                    removedParts.AddRange(parts);
+                }
+
+                foreach (var part in removedParts)
+                {
+                    manager.ApplicationParts.Remove(part);
+                }
+                
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
         
