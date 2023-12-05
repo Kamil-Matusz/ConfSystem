@@ -66,6 +66,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Attanden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Shared.Tests", "src\Shared\ConfSystem.Shared.Tests\ConfSystem.Shared.Tests.csproj", "{5CE2E023-5B1A-4271-A00C-705E18F48B7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Conferences.Tests.Integration", "tests\Modules\Conferences\ConfSystem.Modules.Conferences.Tests.Integration\ConfSystem.Modules.Conferences.Tests.Integration.csproj", "{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +162,10 @@ Global
 		{5CE2E023-5B1A-4271-A00C-705E18F48B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CE2E023-5B1A-4271-A00C-705E18F48B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CE2E023-5B1A-4271-A00C-705E18F48B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A352BB4F-140C-4C86-992E-D35448E8EFC3} = {3D41970A-3907-4B35-8B4E-872D16320934}
@@ -193,5 +199,6 @@ Global
 		{DAF49641-6E6C-428D-BDF2-8FBF1352E475} = {F511571C-EA9C-419F-823F-A4E73702A243}
 		{37A94BBB-A12E-4E5F-BCA2-A097EEF968D1} = {F511571C-EA9C-419F-823F-A4E73702A243}
 		{5CE2E023-5B1A-4271-A00C-705E18F48B7C} = {F9C5A5DE-9997-4076-9ABD-FDBB3AC079F7}
+		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD} = {F511571C-EA9C-419F-823F-A4E73702A243}
 	EndGlobalSection
 EndGlobal

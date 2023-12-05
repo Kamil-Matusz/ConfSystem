@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfSystem.Modules.Conferences.Core.DAL;
 
-internal class ConferencesDbContext : DbContext
+public sealed class ConferencesDbContext : DbContext
 {
     public DbSet<Conference> Conferences { get; set; }
     public DbSet<Host> Hosts { get; set; }

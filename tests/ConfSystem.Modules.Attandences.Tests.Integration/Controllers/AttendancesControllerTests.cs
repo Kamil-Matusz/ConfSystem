@@ -1,11 +1,8 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Xml;
-using ConfSystem.Modules.Agendas.Application.Agendas.DTO;
 using ConfSystem.Modules.Attandences.Tests.Integration.Common;
 using ConfSystem.Modules.Attendances.Application.Clients.Agendas;
-using ConfSystem.Modules.Attendances.Application.Clients.Agendas.DTO;
 using ConfSystem.Modules.Attendances.Application.DTO;
 using ConfSystem.Modules.Attendances.Domain.Entities;
 using ConfSystem.Modules.Attendances.Infrastructure.DAL;
@@ -115,8 +112,8 @@ public class AttendancesControllerTests : IClassFixture<TestApplicationFactory>,
             attendances.ShouldNotBeEmpty();
             attendances.Length.ShouldBe(1);
         }
-    
-    internal AttendancesControllerTests(TestApplicationFactory factory, TestAttendancesDbContext dbContext)
+        
+    public AttendancesControllerTests(TestApplicationFactory factory, TestAttendancesDbContext dbContext)
     {
         _agendasApiClient = Substitute.For<IAgendasApiClient>();
         _client = factory
