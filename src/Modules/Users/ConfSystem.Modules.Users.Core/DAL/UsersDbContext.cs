@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfSystem.Modules.Users.Core.DAL;
 
-internal class UsersDbContext : DbContext
+public sealed class UsersDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
         

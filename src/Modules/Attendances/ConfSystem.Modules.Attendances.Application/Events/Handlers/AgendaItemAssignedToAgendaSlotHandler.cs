@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using ConfSystem.Modules.Attendances.Application.Clients.Agendas;
 using ConfSystem.Modules.Attendances.Domain.Entities;
 using ConfSystem.Modules.Attendances.Domain.Exceptions;
@@ -5,6 +6,8 @@ using ConfSystem.Modules.Attendances.Domain.Policies;
 using ConfSystem.Modules.Attendances.Domain.Repositories;
 using ConfSystem.Shared.Abstractions.Events;
 
+[assembly:InternalsVisibleTo("ConfSystem.Modules.Attandences.Tests.Unit")]
+[assembly:InternalsVisibleTo("DynamicProxyAssemblyGen2")]
 namespace ConfSystem.Modules.Attendances.Application.Events.Handlers;
 
 internal sealed class AgendaItemAssignedToAgendaSlotHandler : IEventHandler<AgendaItemAssignedToAgendaSlot>

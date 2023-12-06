@@ -26,4 +26,12 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="ConfSystem.Shared.Tests" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="ConfSystem.Modules.Attandences.Tests.Integration" />
+    </ItemGroup>
+
 </Project>

@@ -13,33 +13,37 @@ using ConfSystem.Shared.Infrastructure.Modules;
 using Convey;
 using Convey.MessageBrokers.RabbitMQ;
 
-var builder = WebApplication.CreateBuilder(args);
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-IConfiguration configuration = builder.Configuration;
-IList<Assembly> _assemblies = AssembliesLoader.LoadAssemblies(configuration);
-IList<IModule> _modules = AssembliesLoader.LoadModules(_assemblies);
+        IConfiguration configuration = builder.Configuration;
+        IList<Assembly> _assemblies = AssembliesLoader.LoadAssemblies(configuration);
+        IList<IModule> _modules = AssembliesLoader.LoadModules(_assemblies);
 
-IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureModules();
+        IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureModules();
 
-builder.Services
-    .AddInfrastructure(_modules, _assemblies)
-    .AddConferences()
-    .AddSpeakers()
-    .AddUsers()
-    .AddTickets()
-    .AddAgendas()
-    .AddAAttendances()
-    .AddSaga();
+        builder.Services
+            .AddInfrastructure(_modules, _assemblies)
+            .AddConferences()
+            .AddSpeakers()
+            .AddUsers()
+            .AddTickets()
+            .AddAgendas()
+            .AddAAttendances()
+            .AddSaga();
 
-var app = builder.Build();
+        var app = builder.Build();
 
-app.UseInfrastructure();
+        app.UseInfrastructure();
 
-app.MapGet("/", () => "Hello World!");
+        app.MapGet("/", () => "Hello World!");
 
-app.MapModuleInfo();
+        app.MapModuleInfo();
 
 // Implemented RabbitMq
 app.UseConvey();
@@ -47,7 +51,9 @@ app.UseRabbitMq();
 
 app.MapControllers();
 
-app.Run();
+        app.Run();
 
-_assemblies.Clear();
-_modules.Clear();
+        _assemblies.Clear();
+        _modules.Clear();
+    }
+}
