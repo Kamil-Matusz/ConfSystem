@@ -20,10 +20,13 @@ internal class AccountController : BaseController
     
     [HttpGet]
     [Authorize]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<AccountDto>> GetAsync()
         => OkOrNotFound(await _userService.GetUserAsync(_context.Identity.Id));
 
     [HttpPost("sign-up")]
+    [ProducesResponseType(204)]
     public async Task<ActionResult> SignUpAsync(SignUpDto dto)
     {
         await _userService.SignUpAsync(dto);
@@ -31,6 +34,7 @@ internal class AccountController : BaseController
     }
 
     [HttpPost("sign-in")]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<JsonWebToken>> SignInAsync(SignInDto dto)
         => Ok(await _userService.SignInAsync(dto));
 }

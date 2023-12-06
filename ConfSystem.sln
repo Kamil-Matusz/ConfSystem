@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Shared.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Conferences.Tests.Integration", "tests\Modules\Conferences\ConfSystem.Modules.Conferences.Tests.Integration\ConfSystem.Modules.Conferences.Tests.Integration.csproj", "{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfSystem.Modules.Users.Tests.Integration", "tests\Modules\ConfSystem.Modules.Users.Tests.Integration\ConfSystem.Modules.Users.Tests.Integration.csproj", "{C69B6AE4-AF24-4482-AF67-7FC310B71ACF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +168,10 @@ Global
 		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69B6AE4-AF24-4482-AF67-7FC310B71ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69B6AE4-AF24-4482-AF67-7FC310B71ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69B6AE4-AF24-4482-AF67-7FC310B71ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69B6AE4-AF24-4482-AF67-7FC310B71ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A352BB4F-140C-4C86-992E-D35448E8EFC3} = {3D41970A-3907-4B35-8B4E-872D16320934}
@@ -200,5 +206,6 @@ Global
 		{37A94BBB-A12E-4E5F-BCA2-A097EEF968D1} = {F511571C-EA9C-419F-823F-A4E73702A243}
 		{5CE2E023-5B1A-4271-A00C-705E18F48B7C} = {F9C5A5DE-9997-4076-9ABD-FDBB3AC079F7}
 		{3B9EB2E6-3373-44E0-BA47-6235C7CBDAAD} = {F511571C-EA9C-419F-823F-A4E73702A243}
+		{C69B6AE4-AF24-4482-AF67-7FC310B71ACF} = {F511571C-EA9C-419F-823F-A4E73702A243}
 	EndGlobalSection
 EndGlobal

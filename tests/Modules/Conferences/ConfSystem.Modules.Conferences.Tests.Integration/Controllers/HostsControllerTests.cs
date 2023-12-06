@@ -88,7 +88,6 @@ public class HostsControllerTests : IClassFixture<TestApplicationFactory>, IClas
 
         // Assert
         deleteResponse.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-        
     }
 
 }
