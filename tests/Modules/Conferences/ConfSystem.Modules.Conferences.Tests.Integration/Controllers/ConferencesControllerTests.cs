@@ -8,6 +8,7 @@ using Xunit;
 
 namespace ConfSystem.Modules.Conferences.Tests.Integration.Controllers;
 
+[Collection("integration")]
 public class ConferencesControllerTests : IClassFixture<TestApplicationFactory>, IClassFixture<TestConferencesDbContext>
 {
     private const string Path = "conferences-module/conferences";

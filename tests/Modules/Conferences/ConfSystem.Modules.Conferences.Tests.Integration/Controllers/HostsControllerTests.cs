@@ -41,7 +41,7 @@ public class HostsControllerTests : IClassFixture<TestApplicationFactory>, IClas
     }
     
     [Fact]
-    public async Task added_new_host__should_return_ok_status_code()
+    public async Task added_new_host_should_return_ok_status_code()
     {
         // Arrange
         var userId = Guid.NewGuid();

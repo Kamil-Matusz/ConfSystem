@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfSystem.Modules.Speakers.Core.DAL;
 
-internal class SpeakersDbContext : DbContext
+public sealed class SpeakersDbContext : DbContext
 {
     public DbSet<Speaker> Speakers { get; set; }
         

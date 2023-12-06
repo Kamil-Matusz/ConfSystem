@@ -58,8 +58,8 @@ public class AttendancesControllerTests : IClassFixture<TestApplicationFactory>,
     }
     
     [Fact]
-        public async Task get_browse_attendances_given_valid_conference_and_participant_should_return_all_attendances()
-        {
+    public async Task get_browse_attendances_given_valid_conference_and_participant_should_return_all_attendances()
+    {
             // Arrange
             var from = DateTime.UtcNow;
             var to = from.AddDays(1);
@@ -111,7 +111,7 @@ public class AttendancesControllerTests : IClassFixture<TestApplicationFactory>,
             var attendances = await response.Content.ReadFromJsonAsync<AttendanceDto[]>();
             attendances.ShouldNotBeEmpty();
             attendances.Length.ShouldBe(1);
-        }
+    }
         
     public AttendancesControllerTests(TestApplicationFactory factory, TestAttendancesDbContext dbContext)
     {
