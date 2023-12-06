@@ -45,11 +45,11 @@ public class Program
 
         app.MapModuleInfo();
 
-// Implemented RabbitMq
-app.UseConvey();
-app.UseRabbitMq();
+        // Implemented RabbitMq
+        app.UseConvey();
+        app.UseRabbitMq();
 
-app.MapControllers();
+        app.MapControllers();
 
         app.Run();
 
