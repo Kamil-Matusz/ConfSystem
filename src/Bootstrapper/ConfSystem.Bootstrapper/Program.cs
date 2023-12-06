@@ -3,12 +3,15 @@ using ConfSystem.Bootstrapper;
 using ConfSystem.Modules.Agendas.Api;
 using ConfSystem.Modules.Attendances.Api;
 using ConfSystem.Modules.Conferences.Api;
+using ConfSystem.Modules.Saga;
 using ConfSystem.Modules.Speakers.Api;
 using ConfSystem.Modules.Tickets.Api;
 using ConfSystem.Modules.Users.Api;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure;
 using ConfSystem.Shared.Infrastructure.Modules;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 
 public class Program
 {
@@ -31,7 +34,8 @@ public class Program
             .AddUsers()
             .AddTickets()
             .AddAgendas()
-            .AddAAttendances();
+            .AddAAttendances()
+            .AddSaga();
 
         var app = builder.Build();
 
@@ -41,7 +45,11 @@ public class Program
 
         app.MapModuleInfo();
 
-        app.MapControllers();
+// Implemented RabbitMq
+app.UseConvey();
+app.UseRabbitMq();
+
+app.MapControllers();
 
         app.Run();
 

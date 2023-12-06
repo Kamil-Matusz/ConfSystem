@@ -16,15 +16,21 @@ internal class SalesController : BaseController
     }
     
     [HttpGet("conferences/{conferenceId}")]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<IEnumerable<TicketSaleInfoDto>>> GetAll(Guid conferenceId)
         => OkOrNotFound(await _ticketSaleService.GetAllAsync(conferenceId));
 
     [HttpGet("conferences/{conferenceId}/current")]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<TicketSaleInfoDto>> GetCurrent(Guid conferenceId)
         => OkOrNotFound(await _ticketSaleService.GetCurrentAsync(conferenceId));
 
-    [Authorize]
+    [Authorize(Policy)]
     [HttpPost("conferences/{conferenceId}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<ActionResult> Post(Guid conferenceId, TicketSaleDto dto)
     {
         dto.ConferenceId = conferenceId;

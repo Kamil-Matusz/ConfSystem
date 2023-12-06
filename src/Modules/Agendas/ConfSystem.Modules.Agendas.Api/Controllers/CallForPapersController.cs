@@ -25,10 +25,16 @@ internal class CallForPapersController : BaseController
     
     [HttpGet]
     [AllowAnonymous]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<CallForPapersDto>> GetAsync(Guid conferenceId) 
         => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetCallForPapers {ConferenceId = conferenceId}));
 
     [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<ActionResult> CreateAsync(Guid conferenceId, CreateCallForPapers command)
     {
         await _commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
@@ -36,6 +42,8 @@ internal class CallForPapersController : BaseController
     }
 
     [HttpPut("open")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult> OpenAsync(Guid conferenceId)
     {
         await _commandDispatcher.SendAsync(new OpenCallForPapers(conferenceId));
@@ -43,6 +51,8 @@ internal class CallForPapersController : BaseController
     }
         
     [HttpPut("close")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult> CloseAsync(Guid conferenceId)
     {
         await _commandDispatcher.SendAsync(new OpenCallForPapers(conferenceId));

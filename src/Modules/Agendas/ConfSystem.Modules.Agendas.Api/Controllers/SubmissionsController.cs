@@ -19,10 +19,16 @@ internal class SubmissionsController : BaseController
     }
 
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<SubmissionDto>> GetAsync(Guid id)
         => OkOrNotFound(await _queryDispatcher.QueryAsync(new GetSubmission { Id = id }));
     
     [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(403)]
     public async Task<ActionResult> CreateSubmissionAsync(CreateSubmission command)
     {
         await _commandDispatcher.SendAsync(command);
@@ -30,6 +36,8 @@ internal class SubmissionsController : BaseController
     }
     
     [HttpPut("{id:guid}/approve")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult> ApproveSubmissionAsync(Guid id)
     {
         await _commandDispatcher.SendAsync(new ApproveSubmission(id));
@@ -37,6 +45,8 @@ internal class SubmissionsController : BaseController
     }
     
     [HttpPut("{id:guid}/reject")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult> RejectSubmissionAsync(Guid id)
     {
         await _commandDispatcher.SendAsync(new RejectSubmission(id));

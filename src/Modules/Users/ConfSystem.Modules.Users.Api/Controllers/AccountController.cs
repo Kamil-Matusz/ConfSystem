@@ -18,8 +18,8 @@ internal class AccountController : BaseController
         _context = context;
     }
     
-    [HttpGet]
     [Authorize]
+    [HttpGet]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     public async Task<ActionResult<AccountDto>> GetAsync()

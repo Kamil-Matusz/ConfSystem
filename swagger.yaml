@@ -1,0 +1,1387 @@
+openapi: 3.0.1
+info:
+  title: ConfSystem
+  version: v1
+paths:
+  /users-module/Account:
+    get:
+      tags:
+        - Account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.AccountDto'
+  /users-module/Account/sign-up:
+    post:
+      tags:
+        - Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignUpDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignUpDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignUpDto'
+      responses:
+        '200':
+          description: Success
+  /users-module/Account/sign-in:
+    post:
+      tags:
+        - Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignInDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignInDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Users.Core.DTO.SignInDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Shared.Abstractions.Auth.JsonWebToken'
+  /agendas-module/Agendas:
+    get:
+      tags:
+        - Agendas
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.DTO.AgendaTrackDto'
+  /agendas-module/Agendas/items:
+    get:
+      tags:
+        - Agendas
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.DTO.AgendaItemDto'
+  /agendas-module/Agendas/items/{id}:
+    get:
+      tags:
+        - Agendas
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.DTO.AgendaItemDto'
+  /agendas-module/Agendas/tracks:
+    post:
+      tags:
+        - Agendas
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaTrack'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaTrack'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaTrack'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Agendas/slots:
+    post:
+      tags:
+        - Agendas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaSlot'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaSlot'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaSlot'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Agendas/slots/placeholder:
+    put:
+      tags:
+        - Agendas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignPlaceholderAgendaSlot'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignPlaceholderAgendaSlot'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignPlaceholderAgendaSlot'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Agendas/slots/regular:
+    put:
+      tags:
+        - Agendas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignRegularAgendaSlot'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignRegularAgendaSlot'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignRegularAgendaSlot'
+      responses:
+        '200':
+          description: Success
+  /attendances-module/Attendances/{conferenceId}:
+    get:
+      tags:
+        - Attendances
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Attendances.Application.DTO.AttendanceDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /attendances-module/Attendances/events/{eventId}/attend:
+    post:
+      tags:
+        - Attendances
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /agendas-module/CallForPapers:
+    get:
+      tags:
+        - CallForPapers
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.CallForPapers.DTO.CallForPapersDto'
+    post:
+      tags:
+        - CallForPapers
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.CallForPapers.Commands.CreateCallForPapers'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.CallForPapers.Commands.CreateCallForPapers'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.CallForPapers.Commands.CreateCallForPapers'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/CallForPapers/open:
+    put:
+      tags:
+        - CallForPapers
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /agendas-module/CallForPapers/close:
+    put:
+      tags:
+        - CallForPapers
+      parameters:
+        - name: conferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /conferences-module/Conferences/{id}:
+    get:
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+    put:
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+    delete:
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /conferences-module/Conferences:
+    get:
+      tags:
+        - Conferences
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDto'
+    post:
+      tags:
+        - Conferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /conferences-module:
+    get:
+      tags:
+        - Home
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  /conferences-module/Host/{id}:
+    get:
+      tags:
+        - Host
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDetailsDto'
+    put:
+      tags:
+        - Host
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDetailsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDetailsDto'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Host
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /conferences-module/Host:
+    get:
+      tags:
+        - Host
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDto'
+    post:
+      tags:
+        - Host
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.HostDto'
+      responses:
+        '200':
+          description: Success
+  /tickets-module/Sales/conferences/{conferenceId}:
+    get:
+      tags:
+        - Sales
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketSaleInfoDto'
+    post:
+      tags:
+        - Sales
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketSaleDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketSaleDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketSaleDto'
+      responses:
+        '200':
+          description: Success
+  /tickets-module/Sales/conferences/{conferenceId}/current:
+    get:
+      tags:
+        - Sales
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketSaleInfoDto'
+  /speakers-module/Speakers/{id}:
+    get:
+      tags:
+        - Speakers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+    put:
+      tags:
+        - Speakers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+      responses:
+        '200':
+          description: Success
+  /speakers-module/Speakers:
+    get:
+      tags:
+        - Speakers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+    post:
+      tags:
+        - Speakers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Submissions/{id}:
+    get:
+      tags:
+        - Submissions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Submissions.DTO.SubmissionDto'
+  /agendas-module/Submissions:
+    post:
+      tags:
+        - Submissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Submissions.Commands.CreateSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Submissions.Commands.CreateSubmission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Submissions.Commands.CreateSubmission'
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Submissions/{id}/approve:
+    put:
+      tags:
+        - Submissions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /agendas-module/Submissions/{id}/reject:
+    put:
+      tags:
+        - Submissions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /tickets-module/Tickets:
+    get:
+      tags:
+        - Tickets
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.TicketDto'
+  /tickets-module/Tickets/conferences/{conferenceId}/purchase:
+    post:
+      tags:
+        - Tickets
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignPlaceholderAgendaSlot:
+      type: object
+      properties:
+        agendaSlotId:
+          type: string
+          format: uuid
+        agendaTrackId:
+          type: string
+          format: uuid
+        placeholder:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.Commands.AssignRegularAgendaSlot:
+      type: object
+      properties:
+        agendaTrackId:
+          type: string
+          format: uuid
+        agendaSlotId:
+          type: string
+          format: uuid
+        agendaItemId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaSlot:
+      type: object
+      properties:
+        agendaTrackId:
+          type: string
+          format: uuid
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        participantsLimit:
+          type: integer
+          format: int32
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.Commands.CreateAgendaTrack:
+      type: object
+      properties:
+        conferenceId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.DTO.AgendaItemDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        level:
+          type: integer
+          format: int32
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        speakers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Agendas.DTO.SpeakerDto'
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.DTO.AgendaTrackDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        slots:
+          type: array
+          items: {}
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Agendas.DTO.SpeakerDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.CallForPapers.Commands.CreateCallForPapers:
+      type: object
+      properties:
+        conferenceId:
+          type: string
+          format: uuid
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.CallForPapers.DTO.CallForPapersDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        isOpened:
+          type: boolean
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Submissions.Commands.CreateSubmission:
+      type: object
+      properties:
+        conferenceId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        level:
+          type: integer
+          format: int32
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        speakerIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Submissions.DTO.SpeakerDto:
+      type: object
+      properties:
+        speakerId:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Agendas.Application.Submissions.DTO.SubmissionDto:
+      type: object
+      properties:
+        submissionId:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        level:
+          type: integer
+          format: int32
+        status:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        speakers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfSystem.Modules.Agendas.Application.Submissions.DTO.SpeakerDto'
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Attendances.Application.DTO.AttendanceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        eventId:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        level:
+          type: integer
+          format: int32
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ConfSystem.Modules.Conferences.Core.DTO.ConferenceDetailsDto:
+      required:
+        - description
+        - hostId
+        - name
+      type: object
+      properties:
+        conferenceId:
+          type: string
+          format: uuid
+        hostId:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+        hostName:
+          type: string
+          nullable: true
+        location:
+          type: string
+          nullable: true
+        logoUrl:
+          type: string
+          nullable: true
+        participantsLimit:
+          type: integer
+          format: int32
+          nullable: true
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        description:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ConfSystem.Modules.Conferences.Core.DTO.ConferenceDto:
+      required:
+        - hostId
+        - name
+      type: object
+      properties:
+        conferenceId:
+          type: string
+          format: uuid
+        hostId:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+        hostName:
+          type: string
+          nullable: true
+        location:
+          type: string
+          nullable: true
+        logoUrl:
+          type: string
+          nullable: true
+        participantsLimit:
+          type: integer
+          format: int32
+          nullable: true
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ConfSystem.Modules.Conferences.Core.DTO.HostDetailsDto:
+      required:
+        - name
+      type: object
+      properties:
+        hostId:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 3
+          type: string
+          nullable: true
+        conferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfSystem.Modules.Conferences.Core.DTO.ConferenceDto'
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Conferences.Core.DTO.HostDto:
+      required:
+        - name
+      type: object
+      properties:
+        hostId:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 3
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 3
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Speakers.Core.DTO.SpeakerDto:
+      required:
+        - bio
+        - email
+        - fullName
+      type: object
+      properties:
+        speakerId:
+          type: string
+          format: uuid
+        email:
+          minLength: 1
+          type: string
+          format: email
+        fullName:
+          maxLength: 100
+          minLength: 3
+          type: string
+        bio:
+          maxLength: 100
+          minLength: 3
+          type: string
+        avatarUrl:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Tickets.Core.DTO.ConferenceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Modules.Tickets.Core.DTO.TicketDto:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+          nullable: true
+        purchasedAt:
+          type: string
+          format: date-time
+        conference:
+          $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.ConferenceDto'
+      additionalProperties: false
+    ConfSystem.Modules.Tickets.Core.DTO.TicketSaleDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        conferenceId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        price:
+          maximum: 100000
+          minimum: 0
+          type: number
+          format: double
+          nullable: true
+        amount:
+          type: integer
+          format: int32
+          nullable: true
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ConfSystem.Modules.Tickets.Core.DTO.TicketSaleInfoDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        conference:
+          $ref: '#/components/schemas/ConfSystem.Modules.Tickets.Core.DTO.ConferenceDto'
+        ticketPrice:
+          type: number
+          format: double
+          nullable: true
+        totalTickets:
+          type: integer
+          format: int32
+          nullable: true
+        availableTickets:
+          type: integer
+          format: int32
+          nullable: true
+        saleFrom:
+          type: string
+          format: date-time
+        saleTo:
+          type: string
+          format: date-time
+        isFree:
+          type: boolean
+          readOnly: true
+        unlimitedTickets:
+          type: boolean
+          readOnly: true
+        isAvailable:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    ConfSystem.Modules.Users.Core.DTO.AccountDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        email:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        claims:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ConfSystem.Modules.Users.Core.DTO.SignInDto:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+          format: email
+        password:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ConfSystem.Modules.Users.Core.DTO.SignUpDto:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        email:
+          minLength: 1
+          type: string
+          format: email
+        password:
+          minLength: 1
+          type: string
+        role:
+          type: string
+          nullable: true
+        claims:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          nullable: true
+      additionalProperties: false
+    ConfSystem.Shared.Abstractions.Auth.JsonWebToken:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          nullable: true
+        refreshToken:
+          type: string
+          nullable: true
+        expires:
+          type: integer
+          format: int64
+        id:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        claims:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          nullable: true
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
