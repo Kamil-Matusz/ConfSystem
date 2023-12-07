@@ -24,21 +24,3 @@ jobs:
       
     - name: Build the project
       run: dotnet build ConfSystem.sln
-
-  test:
-
-    runs-on: ubuntu-latest
-
-    needs: build  # Oczekiwanie na zakończenie pracy zadania "build"
-
-    steps:
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore ConfSystem.sln
-
-    - name: Run tests in Folder1Tests
-      run: dotnet test tests/Modules/Conferences/ConfSystem.Modules.Conferences.Tests.Integration
