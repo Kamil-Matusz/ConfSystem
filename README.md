@@ -32,3 +32,9 @@ It will start the required infrastructure using [Docker](https://docs.docker.com
 cd src/Bootstrapper/ConfSystem.Bootstrapper
 dotnet run
 ```
+
+To run the project with Api Gateway:
+```
+cd src/Gateway/ConfSystem.Api.Gateway
+dotnet run
+```
