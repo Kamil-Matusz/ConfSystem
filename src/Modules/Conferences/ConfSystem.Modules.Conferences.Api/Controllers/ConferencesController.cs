@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConfSystem.Modules.Conferences.Api.Controllers;
 
-[Authorize]
+[Authorize(Policy = Policy)]
 internal class ConferencesController : BaseController
 {
     private const string Policy = "conferences";

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace ConfSystem.Modules.Conferences.Api.Controllers;
 
-[Authorize]
+[Authorize(Policy = Policy)]
 internal class HostController : BaseController
 {
     private const string Policy = "hosts";
