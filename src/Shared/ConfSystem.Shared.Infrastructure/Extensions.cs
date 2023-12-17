@@ -9,6 +9,7 @@ using ConfSystem.Shared.Infrastructure.Contexts;
 using ConfSystem.Shared.Infrastructure.Errors;
 using ConfSystem.Shared.Infrastructure.Events;
 using ConfSystem.Shared.Infrastructure.Kernel;
+using ConfSystem.Shared.Infrastructure.Logging;
 using ConfSystem.Shared.Infrastructure.Messaging;
 using ConfSystem.Shared.Infrastructure.Modules;
 using ConfSystem.Shared.Infrastructure.PostgreSQL;

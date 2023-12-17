@@ -9,6 +9,7 @@ using ConfSystem.Modules.Tickets.Api;
 using ConfSystem.Modules.Users.Api;
 using ConfSystem.Shared.Abstractions.Modules;
 using ConfSystem.Shared.Infrastructure;
+using ConfSystem.Shared.Infrastructure.Logging;
 using ConfSystem.Shared.Infrastructure.Modules;
 using Convey;
 using Convey.MessageBrokers.RabbitMQ;
@@ -26,7 +27,7 @@ public class Program
         IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureModules();
-
+        
         builder.Services
             .AddInfrastructure(_modules, _assemblies)
             .AddConferences()
@@ -36,6 +37,8 @@ public class Program
             .AddAgendas()
             .AddAAttendances()
             .AddSaga();
+
+        builder.UseSerilog();
 
         var app = builder.Build();
 
