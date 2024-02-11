@@ -5,10 +5,7 @@ namespace ConfSystem.Modules.Conferences.Core.DTO;
 public class ConferenceDto
 {
     public Guid ConferenceId { get; set; }
-    [Required]
     public Guid HostId { get; set; }
-    [Required]
-    [StringLength(100, MinimumLength = 3)]
     public string Name { get; set; }
     public string HostName { get; set; }
     public string Location { get; set; }
