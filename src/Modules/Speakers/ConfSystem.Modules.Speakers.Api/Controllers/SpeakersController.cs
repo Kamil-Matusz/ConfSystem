@@ -1,14 +1,16 @@
+using ConfSystem.Modules.Speakers.Api.Controllers;
 using ConfSystem.Modules.Speakers.Core.DTO;
 using ConfSystem.Modules.Speakers.Core.Services;
 using ConfSystem.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConfSystem.Modules.Speakers.Api.Controllers;
+namespace ConfSystem.Modules.Speakres.Api.Controllers;
 
-[Authorize]
+[Authorize(Policy = Policy)]
 internal class SpeakersController : BaseController
 {
+    private const string Policy = "speakers";
     private readonly ISpeakersService _speakersService;
     private readonly IContext _context;
 
