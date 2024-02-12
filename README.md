@@ -8,6 +8,7 @@ Depending on the module complexity, different architectural styles are being use
 - C# 11
 - .NET 7.0
 - Entity Framework Core
+- FluentValidation
 - PostgreSQL
 - Docker
 - RabbitMQ
